@@ -1,0 +1,55 @@
+Enter the number of blocks: 5
+Enter the number of processes: 4
+Enter the size of the blocks in Kb: 100 500 200 300 600
+Enter the size of the processes in Kb: 212 417 112 405
+
+
+=========================Fixed partitioning first fit output===================
+
+The block number of all processes is shown below:
+Process No.         Block number
+     1                 2
+     2                 5
+     3                 3
+External fragmentation occurs in Process 4
+The internal fragment size in each block is shown below
+Block No.            Fragment size
+   1                     100
+   2                     288
+   3                     88
+   4                     300
+   5                     183
+
+
+===========================Fixed partitioning best fit output==============================
+
+The block number of all processes is shown below:
+Process No.         Block number
+     1                 4
+     2                 2
+     3                 3
+     4                 5
+The internal fragment size in each block is shown below
+Block No.            Fragment size
+   1                     100
+   2                     83
+   3                     88
+   4                     88
+   5                     195
+
+
+===========================Fixed partition worst fit output=============================
+
+The block number of all processes is shown below:
+Process No.         Block number
+     1                 5
+     2                 2
+     3                 4
+External fragmentation occurs in Process 4
+The internal fragment size in each block is shown below
+Block No.            Fragment size
+   1                     100
+   2                     83
+   3                     200
+   4                     188
+   5                     388
