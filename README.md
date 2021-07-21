@@ -1,2 +1,2 @@
 # operating-systems-lab
-Implementation of various OS Algorithms and Techniques (using Threads in C++)
+Implementation of various Operating System Algorithms and Techniques (some using Threads in C++11)
