@@ -1,50 +1,53 @@
 #include<bits/stdc++.h>
+
+
+//Macros to make my life easier
 #define rep(i,a,n)      for(int i=a;i<n;i++)
 #define all(a)          a.begin(), a.end()
 #define display(a)      for(auto x: a) cout<<x<<" "; cout<<"\n";
 using namespace std;
 typedef vector < int > vii;
 
-int main(){
-    
-    cout<<"Enter number of processes: "<<endl;
+int main() {
+
+	cout << "Enter number of processes: " << endl;
 	int n;
-	cin>>n;
-	cout<<"Enter number of resources: "<<endl;
+	cin >> n;
+	cout << "Enter number of resources: " << endl;
 	int m;
-	cin>>m;
+	cin >> m;
 	vii arr(n);
 	map <int, vii> maxneed, allocation;
 	vii available(m), total(m);
-	rep(i,0,n){
+	rep(i, 0, n) {
 		maxneed[i].resize(m);
 		allocation[i].resize(m);
 	}
-    /////////////////////////////////////////////
-    //Input
-    /////////////////////////////////////////////
-	cout<<"Enter process information as PID / Maximum Need Vector / Initial Allocation Vector: "<<endl;
-	cout<<"(PIDs are 0-indexed)"<<endl;
-	rep(i,0,n){
+	/////////////////////////////////////////////
+	//Input
+	/////////////////////////////////////////////
+	cout << "Enter process information as PID / Maximum Need Vector / Initial Allocation Vector: " << endl;
+	cout << "(PIDs are 0-indexed)" << endl;
+	rep(i, 0, n) {
 		int id;
-		cin>>id;
-		arr[i]=id;
-		rep(ii,0,m){
+		cin >> id;
+		arr[i] = id;
+		rep(ii, 0, m) {
 			int temp;
-			cin>>temp;
-			maxneed[id][ii]=temp;
+			cin >> temp;
+			maxneed[id][ii] = temp;
 		}
-		rep(ii,0,m){
+		rep(ii, 0, m) {
 			int temp;
-			cin>>temp;
-			allocation[id][ii]=temp;
-			available[ii]+=temp;
+			cin >> temp;
+			allocation[id][ii] = temp;
+			available[ii] += temp;
 		}
 	}
-	cout<<"Enter number of resource instances: "<<endl;
-	rep(i,0,m){
-		cin>>total[i];
-		available[i]=total[i]-available[i];
+	cout << "Enter number of resource instances: " << endl;
+	rep(i, 0, m) {
+		cin >> total[i];
+		available[i] = total[i] - available[i];
 	}
 	sort(all(arr));
 //	cout<<"Total instances of resources: "<<endl;
@@ -62,43 +65,43 @@ int main(){
 //		}
 //		cout<<endl;
 //	}
-    /////////////////////////////////////////////
-    //Checking all safe sequences
-    /////////////////////////////////////////////
+	/////////////////////////////////////////////
+	//Checking all safe sequences
+	/////////////////////////////////////////////
 	set <vii> s;
-	vii temp=available;
-	do{	
-		available=temp;
-		int flag=1;
-		rep(idx,0,n){
+	vii temp = available;
+	do {
+		available = temp;
+		int flag = 1;
+		rep(idx, 0, n) {
 			vii need(m);
-			rep(i,0,m){
-				need[i]=maxneed[arr[idx]][i]-allocation[arr[idx]][i];
-				if(need[i]>available[i]){
-					flag=0;
+			rep(i, 0, m) {
+				need[i] = maxneed[arr[idx]][i] - allocation[arr[idx]][i];
+				if (need[i] > available[i]) {
+					flag = 0;
 					break;
 				}
 			}
-			if(flag==0) break;
-			else rep(i,0,m) available[i]+=(allocation[arr[idx]][i]);
+			if (flag == 0) break;
+			else rep(i, 0, m) available[i] += (allocation[arr[idx]][i]);
 		}
-		if(flag==0) continue;
+		if (flag == 0) continue;
 		else s.insert(arr);
-	}while(next_permutation(all(arr)));
+	} while (next_permutation(all(arr)));
 	/////////////////////////////////////////////
-    //Displaying all safe sequences
-    /////////////////////////////////////////////
-    cout<<"All possible safe sequences: "<<endl;
-    int id;
-	for(auto i:s){
+	//Displaying all safe sequences
+	/////////////////////////////////////////////
+	cout << "All possible safe sequences: " << endl;
+	int id;
+	for (auto i : s) {
 		display(i);
-        id=i[n-1];
-		rep(ii,0,n+5) cout<<"-";
-		cout<<endl;
+		id = i[n - 1];
+		rep(ii, 0, n + 5) cout << "-";
+		cout << endl;
 	}
 	/////////////////////////////////////////////
-    //Getting last task executed
-    /////////////////////////////////////////////
-    cout<<"Process ID "<<id<<" executed last."<<endl;
-    return 0;
+	//Getting last task executed
+	/////////////////////////////////////////////
+	cout << "Process ID " << id << " executed last." << endl;
+	return 0;
 }
